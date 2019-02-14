@@ -13,20 +13,12 @@ int main(void){
 	while(q--){
 		int l, r, d;
 		cin >> l >> r >> d;
-		if(d == 1 && (d < l || d > r)){
-			cout << 1 << endl;
-		}
-		else{
-			int i = 1;
-			while(true){
-				int a = d * i;
-				if(a < l || a > r){
-					cout << a << endl;
-					break;
-				}
-				i++;
-			}
-		}
+        if(d < l || d > r){
+            cout << d << endl;
+        }
+        else{
+            cout << (r /d) *d + d;
+        }
 	}
 	return 0;
 }

@@ -14,14 +14,14 @@
                 "focus": true,
                 "panel": "shared",
             },
-            "windows": {
+            "linux": {
                 "command":  "g++",
                 "args": [
                     "-ggdb",
                     "\"${file}\"",
                     "--std=c++11",
                     "-o",
-                    "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
+                    "\"${fileDirname}/${fileBasenameNoExtension}\""
                 ]
             }
         }

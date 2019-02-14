@@ -8,33 +8,25 @@ using namespace std;
 typedef vector<int> vi;
 typedef vector< pair<int, int> > pii;
 
+void rem(string &s, const string &c){
+    auto pos = s.find(c); //function to find substring
+    if(pos == string::npos){
+        cout << -1 << endl;
+        exit(0);
+    }
+    s.erase(0, pos + 1); //remove from 0 to pos + 1
+}
+
 int main(void){
-	string s; cin >> s;
-	stack<int> stackBracket;
-	int res = 0;
-	for(int i = 0; i < s.length(); i++){
-		if(s[i] == '['){
-			stackBracket.push(1);
-		}
-		else if(s[i] == ']' && stackBracket.top() == 1){
-			stackBracket.pop();
-		}
-		else if(stackBracket.top() == 1){
-			if(s[i] == ':'){
-				if(stackBracket.top() == 2){
-					stackBracket.pop();
-					res += 2;
-				}else{
-					stackBracket.push(2);
-					res += 2;
-				}
-			}
-			if(stackBracket.top() == 2){
-				if(s[i] == '|') res += 1;
-			}
-		}
-	}
-	if(!stackBracket.empty()) cout << -1 << endl;
-	else cout << res << endl;
-	return 0;
+    string s; 
+    cin >> s;
+	rem(s, "[");
+	rem(s, ":");
+	reverse(s.begin(), s.end());
+	cout << endl;
+	rem(s, "]");
+	rem(s, ":");
+
+	cout << count(s.begin(), s.end(), '|') + 4 << endl;
+    return 0;
 }

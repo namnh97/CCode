@@ -8,19 +8,7 @@ using namespace std;
 typedef vector<int> vi;
 typedef vector< pair<int, int> > pii;
 
-char numToChar(int a ){
-	return a - 1 + 'a';
-}
-
 int main(void){
-	int s, k, t;
-	cin >> t;
-	while(t--){
-		cin >> s >> k;
-		for(int i = 0; i < s; i++){
-			cout << char('a' + i % k);
-		}
-		cout << endl;
-	}
+	cout << "Hello";
 	return 0;
 }

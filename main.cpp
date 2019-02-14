@@ -9,5 +9,6 @@ typedef vector<int> vi;
 typedef vector< pair<int, int> > pii;
 
 int main(void){
+	cout << "Hello";
 	return 0;
 }
