@@ -1,4 +1,4 @@
 {
     "window.title": "${activeEditorLong}${separator}${rootName}",
-    "editor.fontSize": 18,
+    "editor.fontSize": 17,
 }
