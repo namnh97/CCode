@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1537779783 source:c:\users\namnh997\documents\ccode\cf-problem\zco13003\main.cpp
-	<iostream>
-	<algorithm>
-	<stdio.h>
-	<string.h>
-

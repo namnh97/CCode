@@ -17,7 +17,6 @@ pref_trie;
 
 void sol(){
     pref_trie base;
-
     base.insert("sun");
     string x;
     while(cin >> x){
