@@ -1,60 +1,52 @@
 {
-
-
     "version": "2.0.0",
-
-	"tasks": [
-
-	{
-
-		"label": "build",
-
-		"type": "shell",
-
-		"group": {
-
-			"kind": "build",
-		
-			"isDefault": true
-
-		},
-
-		"presentation": {
-
-			"echo": true,
-
-			"reveal": "always",
-
-			"focus": true,
-
-			"panel": "shared"
-
-		},
-
-		"windows": {
-
-			"command": "g++",
-
-			"args": [
-
-				"-ggdb",
-			
-				"\"${file}\"",
-
-				"--std=c++11",
-				"-Wall",
-
-				"-o",
-
-				"\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
-
-			]
-
-		}
-
-	}
-
-	]
-
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            },
+            "windows": {
+                "command": "g++",
+                "args": [
+                    "-ggdb",
+                    "\"${file}\"",
+                    "--std=c++11",
+                    "-Wall",
+                    "-o",
+                    "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
+                ]
+            },
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "C/C++: g++.exe build active file",
+            "command": "C:\\MinGW\\bin\\g++.exe",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
 }
-

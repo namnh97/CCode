@@ -39,7 +39,6 @@ struct BigInteger {
 		if (rem) d[n++] = rem;
 	}
 
-
 	void operator -= (const BigInteger &a) {
 		int rem = 0;
 		for (int i = 0; i <  n; i++) {
