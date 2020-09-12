@@ -33,7 +33,7 @@
                     "--std=c++11",
                     "-Wall",
                     "-o",
-                    "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
+                    "\"${fileDirname}\/${fileBasenameNoExtension}.exe\""
                 ]
             },
             "problemMatcher": []
