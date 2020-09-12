@@ -14,7 +14,18 @@
                 "focus": true,
                 "panel": "shared"
             },
-            "windows": {
+            // "windows": {
+            //     "command": "g++",
+            //     "args": [
+            //         "-ggdb",
+            //         "\"${file}\"",
+            //         "--std=c++11",
+            //         "-Wall",
+            //         "-o",
+            //         "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
+            //     ]
+            // },
+            "linux": {
                 "command": "g++",
                 "args": [
                     "-ggdb",
