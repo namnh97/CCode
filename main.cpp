@@ -12,10 +12,15 @@ void err(istream_iterator<string> it, T a, Args... args) {
 	err(++it, args...);
 }
 
+void solve() {
+
+}
 
 int main(void){
 	#ifndef ONLINE_JUDGE
-	freopen("input.txt", "r", stdin);
+	freopen("in.txt", "r", stdin);
 	#endif
+	solve();
 	return 0;
 }
+
