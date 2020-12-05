@@ -14,18 +14,7 @@
                 "focus": true,
                 "panel": "shared"
             },
-            // "windows": {
-            //     "command": "g++",
-            //     "args": [
-            //         "-ggdb",
-            //         "\"${file}\"",
-            //         "--std=c++11",
-            //         "-Wall",
-            //         "-o",
-            //         "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
-            //     ]
-            // },
-            "linux": {
+            "windows": {
                 "command": "g++",
                 "args": [
                     "-ggdb",
@@ -33,9 +22,20 @@
                     "--std=c++11",
                     "-Wall",
                     "-o",
-                    "\"${fileDirname}\/${fileBasenameNoExtension}.exe\""
+                    "\"${fileDirname}\\${fileBasenameNoExtension}.exe\""
                 ]
             },
+            // "linux": {
+            //     "command": "g++",
+            //     "args": [
+            //         "-ggdb",
+            //         "\"${file}\"",
+            //         "--std=c++11",
+            //         "-Wall",
+            //         "-o",
+            //         "\"${fileDirname}\/${fileBasenameNoExtension}.exe\""
+            //     ]
+            // },
             "problemMatcher": []
         },
         {
