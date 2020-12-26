@@ -17,20 +17,42 @@ void debugOut() {
 	cerr << endl;
 }
 
-void solve() {
-	fori (i, 1, n) {
-		while (!q.empty() && q.front() <= t) {
-			q.pop();
-		}
-		if (q.size() <= b) {
-			q.push(max(finish, t) + d);
-		} else {
-			cout << "-1";
+const int MAX = 100001;
+ll n, key, des;
+ll otherKeys[MAX];
+ll dist[MAX];
+bool visited[MAX];
+
+ll bfs() {
+	memset(dist, -1, sizeof(dist));
+	queue<ll> q;
+	q.push(key);
+	dist[key] = 0;
+	while (!q.empty()) {
+		ll u = q.front();
+		q.pop();
+		fori (i, 0, n - 1) {
+			ll v = (u * otherKeys[i]) % 100000;
+			if (dist[v] == - 1) {
+				dist[v] = dist[u] + 1;
+				if (v == des) {
+					return dist[v];
+				}
+				q.push(v);
+			}
 		}
 	}
+	return -1;
 }
-
-
+void solve() {
+	cin >> key >> des;
+	cin >> n;
+	fori (i, 0, n - 1) {
+		cin >> otherKeys[i];
+	}
+	int res = bfs();
+	cout << res << endl;
+}
 
 int main(void){
 	#ifndef ONLINE_JUDGE
