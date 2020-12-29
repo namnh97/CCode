@@ -17,53 +17,52 @@ void debugOut() {
 	cerr << endl;
 }
 
-const int MAX = 100001;
-vector<int> edges[MAX];
-bool visited[MAX];
+const int MAX = 10001;
+int t, m, n, a, b;
+int visited[MAX];
+vector<int> adj[MAX];
 
-void dfs(int index) {
-	stack<int> s;
-	s.push(index);
-	visited[index] = true;
-	while (!s.empty()) {
-		int u = s.top();
-		s.pop();
-		for (int i = 0; i < (int)edges[u].size(); i++) {
-			int v = edges[u][i];
-			if (visited[v] == false) {
-				visited[v] = true;
-				s.push(v);
+bool dfs(int u) {
+	visited[u] = 1;
+	for (int i = 0; i < (int)adj[u].size(); i++) {
+		int v = adj[u][i];
+		if (visited[v] == 1) return true;
+		else if (visited[v] == 0) {
+			if (dfs(v)) {
+				return true;
 			}
 		}
+	}
+	visited[u] = 2;
+	return false;
+}
+
+void clear() {
+	memset(visited, 0, sizeof(visited));
+	for (int i = 0; i < MAX; i++) {
+		adj[i].clear();
 	}
 }
 
 void solve() {
-	int t; cin >> t;
+	cin >> t;
 	while (t--) {
-		memset(visited, false, sizeof(visited));
-		for (auto &it : edges) {
-			it.clear();
+		clear();
+		cin >> n >> m;
+		for (int i = 0; i < m; i++) {
+			cin >> a >> b;
+			adj[a].pb(b);
 		}
-		int res = 0;
-		int n, e; cin >> n >> e;
-		for (int i = 0; i < e; i++) {
-			int from, to;
-			cin >> from >> to;
-			edges[from].pb(to);
-			edges[to].pb(from);
-		}
-		for (int i = 0; i < n; i++) { 
-			if (visited[i] == false) {
-				dfs(i);
-				res++;
+		bool loop = false;
+		for (int i = 1; i <= n; i++) {
+			if (visited[i] == 0) {
+				loop = dfs(i);
+				if (loop) break;
 			}
 		}
-		cout << res << endl;
+		cout << (loop ? "YES" : "NO") << endl;
 	}
 }
-
-
 
 int main(void){
 	#ifndef ONLINE_JUDGE
