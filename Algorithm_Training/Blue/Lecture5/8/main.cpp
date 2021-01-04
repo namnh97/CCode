@@ -25,28 +25,27 @@ int stepX[4] = {-1, 1, 0, 0};
 int stepY[4] = {0, 0, -1, 1};
 
 bool isValid(int row, int col) {
-	return row >= 1 && row <= n && col >= 1 && col <= m && (matrix[row][col] != '#');
-}
-
-bool isOut(int row, int col) {
-	return (row == 1 || row == n) && (col == 1 || col == m) && (matrix[row][col] != '#');
+	return row >= 1 && row <= n && col >= 1 && col <= m;
 }
 
 pii BFS(int row, int col) {
 	queue<pii> q;
-	matrix[row][col] = '#';
 	q.push({row, col});
-	int sheeps = 0, wolves = 0;
+	int sheeps =  (matrix[row][col] == 'k') ? 1 : 0;
+	int wolves = (matrix[row][col] == 'v') ? 1 : 0;
+	matrix[row][col] = '#';
 	bool out = false;
+
 	while (!q.empty()) {
 		pii u = q.front(); q.pop();
 		fori (i, 0, 3) {
 			int nextX = u.first + stepX[i];
 			int nextY = u.second + stepY[i];
-			if (isValid(nextX, nextY)) {
-				if (isOut(nextX, nextY)) {
-					out = true;
-				}
+			if (!isValid(nextX, nextY)) {
+				out = true;
+				continue;
+			}
+			if (matrix[nextX][nextY] != '#') {
 				if (matrix[nextX][nextY] == 'k') {
 					sheeps++;
 				} else if (matrix[nextX][nextY] == 'v') {
@@ -74,7 +73,7 @@ void solve() {
 	vector<pii>  res;
 	fori (i, 1, n) {
 		fori (j, 1, m) {
-			if (matrix[i][j] == '.') {
+			if (matrix[i][j] != '#') {
 				pii tmp = BFS(i, j);
 				res.pb(tmp);
 			}

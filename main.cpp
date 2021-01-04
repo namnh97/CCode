@@ -1,9 +1,8 @@
 #include<bits/stdc++.h>
 #define ll long long 
-#define fori(i, a, b) for (int i = (a), _##i = (b); i <= _##i; ++i)
-#define ford(i, a, b) for (int i = (a), _##i = (b); i >= _##i; --i)
 #define pb push_back
 #define mp make_pair
+#define pii pair<int, int>
 using namespace std;
 
 #define debug(args...) { string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); err(_it, args); }
@@ -23,10 +22,12 @@ void solve() {
 
 
 
-int main(void){
+int main(int argc, char** argv){
 	#ifndef ONLINE_JUDGE
-	freopen("in.txt", "r", stdin);
+	freopen(argv[1], "r", stdin);
 	#endif
 	solve();
 	return 0;
 }
+
+
