@@ -17,32 +17,41 @@ void debugOut() {
 	cerr << endl;
 }
 
+struct Job {
+	int a, b, d;
+	bool operator<(const Job& next) const {
+		return a < next.a;
+	}
+};
 
-// prioritize the dealinde order
-// choose the job having the cheapest cost.
-//
 void solve() {
-	time = 0;
-	cost = 0;
-	pq = max - heap();
-	with each task:
-		time += task.b;
-		pq.push(task);
-		while (time > task.d) {
-			t = pq.pop()
-				if (t.b > time- task.d) {
-					t.b -= (time - task.d);
-					cost += (tiem - task.d) / t.a;
-					time = task.d;
-					pq.push(t);
-				}
-				else {
-					cost += t.b / t.a;
-					time = t.b;
-				}
+	int testcases; cin >> testcases;
+	while(testcases--) {
+		int nContracts; cin >> nContracts;
+		priority_queue<Job> pq;
+		vector<Job> jobs;
+
+		for (int i = 0; i < nContracts; i++) {
+			int a, b, c; cin >> a >> b >> c;
+			jobs.push_back((Job) {a, b, c});
 		}
-		out;
+		sort(jobs.begin(), jobs.end(), [&](const Job &first, const Job &second) {
+			return first.d > second.d;
+		});
+		double money = 0;
+		int time = 0;
+		for (int i = 0; i < nContracts; i++) {
+			time += jobs[i].b;
+			pq.push(jobs[i]);
+			while (time > jobs[i].d) {
+				Job top = pq.top(); pq.pop();
+
+				if ()
+			}
+		}
+	}
 }
+
 
 int main(void){
 	#ifndef ONLINE_JUDGE
