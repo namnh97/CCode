@@ -23,26 +23,26 @@ struct Bill {
 };
 
 int duration;
-const int MAX = 1e5;
+const int MAX = 1e6 + 5;
 struct AscendingOrder {
     bool operator() (const Bill& a, const Bill& b) {
-        return a.value > b.value;
+        return a.value < b.value;
     }
 };
 
 struct DescendingOrder {
     bool operator() (const Bill& a, const Bill &b) {
-        return a.value < b.value;
+        return a.value > b.value;
     }
 };
 
 void solve() {
-    cin >> duration;
     int nbills = 0;
-    priority_queue<Bill, vector<Bill>, AscendingOrder> minHeap;
-    priority_queue<Bill, vector<Bill>, DescendingOrder> maxHeap;
+    priority_queue<Bill, vector<Bill>, DescendingOrder> minHeap;
+    priority_queue<Bill, vector<Bill>, AscendingOrder> maxHeap;
     long long money = 0;
     bool taken[MAX] = {false};
+    cin >> duration;
     while (duration--) {
         int receipts; cin >> receipts;
         for (int i = 0; i < receipts; i++) {
@@ -57,7 +57,7 @@ void solve() {
         while (taken[maxHeap.top().index]) {
             maxHeap.pop();
         }
-        money = maxHeap.top().value - minHeap.top().value;
+        money += maxHeap.top().value - minHeap.top().value;
         taken[minHeap.top().index] = taken[maxHeap.top().index] = true;
         minHeap.pop(); maxHeap.pop();
     }
