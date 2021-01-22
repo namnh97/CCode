@@ -4,85 +4,86 @@
 #define ford(i, a, b) for (int i = (a), _##i = (b); i >= _##i; --i)
 #define pb push_back
 #define mp make_pair
+#define pii pair<int, int>
 using namespace std;
 
-#define debug(args...) { string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); err(_it, args); }
-void err(istream_iterator<string> it) {}
-template<typename T, typename... Args>
-void err(istream_iterator<string> it, T a, Args... args) {
-    cerr << *it << " = " << a << endl;
-    err(++it, args...);
-}
-void debugOut() {
-    cerr << endl;
-}
-
 const int MAX = 101;
-const int INF = -1e9;
-struct Edge {
-    int src;
-    int des;
-    int weight;
-    Edge(int src = 0, int des = 0, int weight = 0) {
-        this->src = src;
-        this->des = des;
-        this->weight = weight;
-    }
-};
-
-vector<Edge> graph;
-vector<int> dist(MAX, INF);
+const int INF = 1e9;
+int dist[MAX], cost[MAX];
+bool visited[MAX];
+vector<pii> graph;
 int n;
 
-bool Bellman(int s) {
-    dist[s] = 100;
-    int u, v, w;
-    for (int i = 1; i <= n - 1; i++) {
-        for (auto &Edge : graph) {
-            u = Edge.src;
-            v = Edge.des;
-            w = Edge.weight;
-            if (dist[u] != -INF && (dist[u] + w > dist[v]) && dist[u] >= 0) {
-                dist[v] = dist[u] + w;
+bool hasPath(int s, int f) {
+    memset(visited, false, sizeof(visited));
+    queue<int> q;
+    q.push(s);
+    visited[s] = true;
+    while (!q.empty()) {
+        int u = q.front(); q.pop();
+        for (pii &edge : graph) {
+            if (edge.first == u) { //u -> edge.second;
+                int v = edge.second;
+                if (!visited[v]) {
+                    visited[v] = true;
+                    q.push(v);
+                    if (v == f) {
+                        return true;
+                    }
+                }
             }
         }
-    } 
-    for (auto &Edge : graph) {
-        u = Edge.src;
-        v = Edge.des;
-        w = Edge.weight;
-        if (dist[u] != INF && dist[u] + w < dist[v]) return false;
     }
-    return true;
+    return false;
+}
+
+bool bellMan(int s, int f) {
+    memset(dist, -INF, sizeof(dist));
+    dist[s] = 100;
+    for (int i = 1; i <= n - 1; i++) {
+        for (pii &edge : graph) {
+            int u = edge.first;
+            int v = edge.second;
+            if (dist[u] > 0) {
+                dist[v] = max(dist[v], dist[u] + cost[v]);
+            }
+        }
+    }
+    for (pii & edge : graph) {
+        int u = edge.first;
+        int v = edge.second;
+        if (dist[u] > 0 &&  dist[u] + cost[v] > dist[v] && hasPath(u, f)) {
+            return true;
+        }
+    }
+    return dist[f] > 0;
 }
 
 
-void clear() {
-    for (int i = 0; i < MAX; i++) {
-        dist[i] = INF;
-    }
-    graph.clear();
-}
 void solve() {
     while (cin >> n && n != -1) {
-        clear();
+        graph.clear();
         for (int i = 1; i <= n; i++) {
-            int cost; cin >> cost;
+            cin >> cost[i];
             int numberOfAdj; cin >> numberOfAdj;
             for (int j = 0; j < numberOfAdj; j++) {
                 int adj; cin >> adj;
-                graph.push_back(Edge(i, adj, cost));
+                graph.push_back({i, adj});
             }
         }
-        bool canGo = Bellman(1,);
+        if (bellMan(1, n)) {
+            cout << "winnable" << endl;
+        } else {
+            cout << "hopeless" << endl;
+        }
     }
 }
 
 
 
-int main(void){
+int main(int arc, char **argv){
     #ifndef ONLINE_JUDGE
-    freopen("in.txt", "r", stdin);
+    freopen(argv[1], "r", stdin);
     #endif
     solve();
     return 0;
