@@ -10,8 +10,8 @@ struct Edge {
     int u, v;
     ll weight;
 };
-const ll INF = (1LL<<30);
-const int MAX = 101;
+const ll INF = (1LL<<30)*100;
+const int MAX = 105;
 ll dist[MAX][MAX];
 string monuments[MAX];
 vector<Edge> graph;
@@ -26,10 +26,12 @@ void Bellman(int src) {
             }           
         }
     }
-    for (auto &edge : graph) {
-        if (dist[src][edge.u] != INF && dist[src][edge.v] > dist[src][edge.u] + edge.weight) {
-            dist[src][edge.v] = -INF;
-        }           
+    for (int i = 0; i < n - 1; i++) {
+        for (auto &edge : graph) {
+            if (dist[src][edge.u] != INF && dist[src][edge.v] > dist[src][edge.u] + edge.weight) {
+                dist[src][edge.v] = -INF;
+            }           
+        }
     }
 }
 void solve() {
@@ -80,5 +82,3 @@ int main(int argc, char** argv){
     solve();
     return 0;
 }
-
-

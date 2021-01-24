@@ -1,35 +1,55 @@
 #include<bits/stdc++.h>
 #define ll long long 
-#define fori(i, a, b) for (int i = (a), _##i = (b); i <= _##i; ++i)
-#define ford(i, a, b) for (int i = (a), _##i = (b); i >= _##i; --i)
 #define pb push_back
 #define mp make_pair
+#define pii pair<int, int>
+
 using namespace std;
 
-#define debug(args...) { string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); err(_it, args); }
-void err(istream_iterator<string> it) {}
-template<typename T, typename... Args>
-void err(istream_iterator<string> it, T a, Args... args) {
-    cerr << *it << " = " << a << endl;
-    err(++it, args...);
-}
-void debugOut() {
-    cerr << endl;
+const int MAX = 49;
+const int INF = 1e9;
+int dist[MAX][MAX];
+int n;
+
+void doFloy() {
+    for (int k = 0; k < MAX; k++) {
+        for (int i = 0; i < MAX; i++) {
+            for (int j = 0; j < MAX; j++) {
+                if (i <= k && k <= j) { //to avoid overlap;
+                    dist[i][j] = max(dist[i][j], dist[i][k] + dist[k][j]);
+                }
+            }
+        }
+    }
 }
 
-
-int calDistance(a, b) {
-    sqrt((a[i] - b[i]) ^ 2 + (a[j] - b[j])^ 2)
-}
 void solve() {
+    int tc; cin >> tc;
+    while (tc--) {
+        cin >> n;
+        for (int i = 0; i < MAX; i++) {
+            for (int j = 0; j < MAX; j++) {
+                dist[i][j] = 0;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            int u, v, c;
+            cin >> u >> v >> c;
+            dist[u][v] = max(dist[u][v], c);
+        }
+        doFloy();
+        cout << dist[0][MAX - 1] << endl;
+    }
 }
 
 
 
-int main(void){
+int main(int argc, char** argv){
     #ifndef ONLINE_JUDGE
-    freopen("in.txt", "r", stdin);
+    freopen(argv[1], "r", stdin);
     #endif
     solve();
     return 0;
 }
+
+
