@@ -45,8 +45,8 @@ struct Compare {
 
 void prims(int src) {
     priority_queue<pair<int, double>, vector<pair<int, double>>, Compare> pq;
-    pq.push({src, 0.0});
-    dist[src] = 0.0;
+    pq.push({src, 0});
+    dist[src] = 0;
     
     while (!pq.empty()) {
         int u = pq.top().first; pq.pop();
@@ -62,10 +62,9 @@ void prims(int src) {
     }
 }
 
-
 void init() {
-    memset(visited, false, sizeof(visited));
-    memset(dist, INF, sizeof(dist));
+    fill(visited, visited + MAX, false);
+    fill(dist, dist + MAX, INF);
     buildings.clear();
     for (int i = 0; i < MAX; i++) {
         graph[i].clear();
@@ -80,17 +79,26 @@ void solve() {
             int x, y; cin >> x >> y;
             buildings.pb({x, y});
         }
-        for (int i = 0; i < N - 1; i++) {
-            for (int j = i + 1; j < N; j++) {
-                double k = calDistance(buildings[i], buildings[j]);
-                graph[i].pb({j, k});
-                graph[j].pb({i, k});
-            }
-        }
+
+        vector<vector<bool>> edges(MAX, vector<bool>(MAX, false));
         int M; cin >> M;
         for (int i = 0; i < M; i++) {
             int u, v; cin >> u >> v;
-            dist[--u] = dist[--v] = 0.0;
+            edges[u - 1][v - 1] = true;
+            edges[v - 1][u - 1] = true;
+        }
+
+        for (int i = 0; i < N - 1; i++) {
+            for (int j = i + 1; j < N; j++) {
+                if (edges[i][j] == false) {
+                    double k = calDistance(buildings[i], buildings[j]);
+                    graph[i].pb({j, k});
+                    graph[j].pb({i, k});
+                } else {
+                    graph[i].pb({j, 0});
+                    graph[j].pb({i, 0});
+                }
+            }
         }
         prims(0);
         double res = 0.0;
