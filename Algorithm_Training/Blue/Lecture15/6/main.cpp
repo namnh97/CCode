@@ -52,7 +52,7 @@ void prims(int src) {
         }
     }
 
-    for (int u = 2; u <= C; u++) {
+    for (int u = 1; u <= C; u++) {
         if (path[u] != -1) {
             int v = path[u];
             int c = dist[u];
@@ -60,7 +60,6 @@ void prims(int src) {
             mxGraph[u].pb({v, c});
         }
     }
-
 }
 
 
