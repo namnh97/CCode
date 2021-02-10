@@ -6,6 +6,7 @@
         "cmath": "cpp",
         "complex": "cpp",
         "ostream": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "utility": "cpp"
     }
 }

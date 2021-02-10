@@ -35,12 +35,7 @@ void solve()
         int u, v;
         cin >> u >> v;
         drifts.push_back({u, v});
-        // for (int j = 0; j < i; j++)
-        // {
-        // }
-    }
-    for (int i = 0; i < t; i++) {
-        for (int j = i + 1; j < t; j++) {
+        for (int j = 0; j < i; j++) {
             if (drifts[i].first == drifts[j].first || drifts[i].second == drifts[j].second)
             {
                 doUnion(i, j);
