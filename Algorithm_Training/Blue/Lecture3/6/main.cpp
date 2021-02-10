@@ -1,4 +1,4 @@
-// https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/practice-problems/algorithm/dhoom-4/
+//https://codeforces.com/problemset/problem/37/A
 #include<bits/stdc++.h>
 #define ll long long 
 #define fori(i, a, b) for (int i = (a), _##i = (b); i <= _##i; ++i)
@@ -18,42 +18,30 @@ void debugOut() {
 	cerr << endl;
 }
 
-const int MAX = 100001;
-ll n, key, des;
-ll otherKeys[MAX];
-ll dist[MAX];
-bool visited[MAX];
-
-ll bfs() {
-	memset(dist, -1, sizeof(dist));
-	queue<ll> q;
-	q.push(key);
-	dist[key] = 0;
-	while (!q.empty()) {
-		ll u = q.front();
-		q.pop();
-		fori (i, 0, n - 1) {
-			ll v = (u * otherKeys[i]) % 100000;
-			if (dist[v] == - 1) {
-				dist[v] = dist[u] + 1;
-				if (v == des) {
-					return dist[v];
-				}
-				q.push(v);
-			}
+void solve() {
+	int n;
+	cin >> n;
+	int a[n];
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
+	}
+	sort(a, a + n);
+	int towers = 1;
+	int cur_height = 1;
+	int res = 1;
+	for (int i = 1; i < n; i++) {
+		if (a[i] == a[i - 1]) {
+			cur_height++;
+			res = max(res, cur_height);
+		} else {
+			towers++;
+			cur_height = 1;
 		}
 	}
-	return -1;
+	cout << res << " " << towers;
 }
-void solve() {
-	cin >> key >> des;
-	cin >> n;
-	fori (i, 0, n - 1) {
-		cin >> otherKeys[i];
-	}
-	int res = bfs();
-	cout << res << endl;
-}
+
+
 
 int main(void){
 	#ifndef ONLINE_JUDGE

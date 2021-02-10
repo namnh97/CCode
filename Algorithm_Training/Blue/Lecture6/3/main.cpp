@@ -1,3 +1,4 @@
+//https://codeforces.com/problemset/problem/723/D
 #include<bits/stdc++.h>
 #define ll long long 
 #define fori(i, a, b) for (int i = (a), _##i = (b); i <= _##i; ++i)

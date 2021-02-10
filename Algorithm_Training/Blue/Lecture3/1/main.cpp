@@ -1,4 +1,4 @@
-// https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/practice-problems/algorithm/dhoom-4/
+//https://codeforces.com/problemset/problem/439/B#:~:text=Devu%20is%20a%20dumb%20guy,a%20subject%20is%20x%20hours.
 #include<bits/stdc++.h>
 #define ll long long 
 #define fori(i, a, b) for (int i = (a), _##i = (b); i <= _##i; ++i)
@@ -18,42 +18,24 @@ void debugOut() {
 	cerr << endl;
 }
 
-const int MAX = 100001;
-ll n, key, des;
-ll otherKeys[MAX];
-ll dist[MAX];
-bool visited[MAX];
-
-ll bfs() {
-	memset(dist, -1, sizeof(dist));
-	queue<ll> q;
-	q.push(key);
-	dist[key] = 0;
-	while (!q.empty()) {
-		ll u = q.front();
-		q.pop();
-		fori (i, 0, n - 1) {
-			ll v = (u * otherKeys[i]) % 100000;
-			if (dist[v] == - 1) {
-				dist[v] = dist[u] + 1;
-				if (v == des) {
-					return dist[v];
-				}
-				q.push(v);
-			}
+void solve() {
+	int n, x; cin >> n >> x;
+	int a[n];
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
+	}
+	sort(a, a + n);
+	ll res = 0;
+	for (int i = 0; i < n; i++) {
+		res +=  (1LL * x * a[i]);	
+		if (x > 1) {
+			x--;
 		}
 	}
-	return -1;
+	cout << res;
 }
-void solve() {
-	cin >> key >> des;
-	cin >> n;
-	fori (i, 0, n - 1) {
-		cin >> otherKeys[i];
-	}
-	int res = bfs();
-	cout << res << endl;
-}
+
+
 
 int main(void){
 	#ifndef ONLINE_JUDGE

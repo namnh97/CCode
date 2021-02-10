@@ -1,4 +1,4 @@
-// https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/practice-problems/algorithm/dhoom-4/
+//https://www.spoj.com/problems/MMASS/
 #include<bits/stdc++.h>
 #define ll long long 
 #define fori(i, a, b) for (int i = (a), _##i = (b); i <= _##i; ++i)
@@ -18,42 +18,49 @@ void debugOut() {
 	cerr << endl;
 }
 
-const int MAX = 100001;
-ll n, key, des;
-ll otherKeys[MAX];
-ll dist[MAX];
-bool visited[MAX];
+int convert(char c) {
+	switch(c) {
+		case 'C': return 12;
+		case 'O': return 16;
+		default: return 1;
+	} 
+}
 
-ll bfs() {
-	memset(dist, -1, sizeof(dist));
-	queue<ll> q;
-	q.push(key);
-	dist[key] = 0;
-	while (!q.empty()) {
-		ll u = q.front();
-		q.pop();
-		fori (i, 0, n - 1) {
-			ll v = (u * otherKeys[i]) % 100000;
-			if (dist[v] == - 1) {
-				dist[v] = dist[u] + 1;
-				if (v == des) {
-					return dist[v];
-				}
-				q.push(v);
-			}
+void solve() {
+	string s; cin >> s;
+	stack<int> atoms;
+	for (auto &it : s) {
+		if (isalpha(it)) {
+			atoms.push(convert(it));
+		}
+		else if (isdigit(it)) {
+			int digit = atoms.top();
+			atoms.pop();
+			digit = digit * (it - '0');
+			atoms.push(digit);
+		}
+		else if (it == '(') {
+			atoms.push(-1);
+		}
+		else if (it == ')') {
+			int total = 0;
+			while (atoms.top() != -1) {
+				total += atoms.top();
+				atoms.pop();
+			}	
+			atoms.pop();
+			atoms.push(total);
 		}
 	}
-	return -1;
-}
-void solve() {
-	cin >> key >> des;
-	cin >> n;
-	fori (i, 0, n - 1) {
-		cin >> otherKeys[i];
+	int res = 0;
+	while (!atoms.empty()) {
+		res += atoms.top();
+		atoms.pop();
 	}
-	int res = bfs();
-	cout << res << endl;
+	cout << res;
 }
+
+
 
 int main(void){
 	#ifndef ONLINE_JUDGE

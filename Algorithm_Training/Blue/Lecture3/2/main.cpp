@@ -1,4 +1,4 @@
-// https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/practice-problems/algorithm/dhoom-4/
+//https://codeforces.com/problemset/problem/169/A
 #include<bits/stdc++.h>
 #define ll long long 
 #define fori(i, a, b) for (int i = (a), _##i = (b); i <= _##i; ++i)
@@ -18,42 +18,21 @@ void debugOut() {
 	cerr << endl;
 }
 
-const int MAX = 100001;
-ll n, key, des;
-ll otherKeys[MAX];
-ll dist[MAX];
-bool visited[MAX];
-
-ll bfs() {
-	memset(dist, -1, sizeof(dist));
-	queue<ll> q;
-	q.push(key);
-	dist[key] = 0;
-	while (!q.empty()) {
-		ll u = q.front();
-		q.pop();
-		fori (i, 0, n - 1) {
-			ll v = (u * otherKeys[i]) % 100000;
-			if (dist[v] == - 1) {
-				dist[v] = dist[u] + 1;
-				if (v == des) {
-					return dist[v];
-				}
-				q.push(v);
-			}
-		}
-	}
-	return -1;
-}
 void solve() {
-	cin >> key >> des;
-	cin >> n;
-	fori (i, 0, n - 1) {
-		cin >> otherKeys[i];
+	int n, a, b; cin >> n >> a >> b;
+	vector<int> h(n + 1);
+	fori (i, 1, n) {
+		cin >> h[i];
 	}
-	int res = bfs();
-	cout << res << endl;
+	sort(h.begin() + 1, h.end());
+	if (h[b] < h[b + 1]) {
+		cout << h[b + 1] - h[b];
+	} else {
+		cout << 0;
+	}
 }
+
+
 
 int main(void){
 	#ifndef ONLINE_JUDGE

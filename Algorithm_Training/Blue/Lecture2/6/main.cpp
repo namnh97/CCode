@@ -1,4 +1,4 @@
-// https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/practice-problems/algorithm/dhoom-4/
+//https://codeforces.com/problemset/problem/602/B
 #include<bits/stdc++.h>
 #define ll long long 
 #define fori(i, a, b) for (int i = (a), _##i = (b); i <= _##i; ++i)
@@ -18,42 +18,34 @@ void debugOut() {
 	cerr << endl;
 }
 
-const int MAX = 100001;
-ll n, key, des;
-ll otherKeys[MAX];
-ll dist[MAX];
-bool visited[MAX];
-
-ll bfs() {
-	memset(dist, -1, sizeof(dist));
-	queue<ll> q;
-	q.push(key);
-	dist[key] = 0;
-	while (!q.empty()) {
-		ll u = q.front();
-		q.pop();
-		fori (i, 0, n - 1) {
-			ll v = (u * otherKeys[i]) % 100000;
-			if (dist[v] == - 1) {
-				dist[v] = dist[u] + 1;
-				if (v == des) {
-					return dist[v];
-				}
-				q.push(v);
-			}
-		}
-	}
-	return -1;
-}
 void solve() {
-	cin >> key >> des;
-	cin >> n;
-	fori (i, 0, n - 1) {
-		cin >> otherKeys[i];
+	int n; cin >> n;
+	int a[n];
+	int distinctCount = 0;
+	map<int, int> fre;
+	fori (i, 1, n) {
+		cin >> a[i];
 	}
-	int res = bfs();
+	int j = 1;
+	int res = 0;
+	fori (i, 1, n) {
+		if (fre[a[i]] == 0) {
+			distinctCount++;
+		}
+		fre[a[i]]++;
+		while (j < n && distinctCount > 2) {
+			if (fre[a[j]] == 1) {
+				distinctCount--;
+			}
+			fre[a[j]]--;
+			j++;
+		}
+		res = max(res, i - j + 1);
+	}
 	cout << res << endl;
 }
+
+
 
 int main(void){
 	#ifndef ONLINE_JUDGE

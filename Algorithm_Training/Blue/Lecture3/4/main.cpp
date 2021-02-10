@@ -1,4 +1,4 @@
-// https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/practice-problems/algorithm/dhoom-4/
+//https://codeforces.com/problemset/problem/551/A
 #include<bits/stdc++.h>
 #define ll long long 
 #define fori(i, a, b) for (int i = (a), _##i = (b); i <= _##i; ++i)
@@ -18,42 +18,37 @@ void debugOut() {
 	cerr << endl;
 }
 
-const int MAX = 100001;
-ll n, key, des;
-ll otherKeys[MAX];
-ll dist[MAX];
-bool visited[MAX];
+struct student {
+	int val, index;
+};
 
-ll bfs() {
-	memset(dist, -1, sizeof(dist));
-	queue<ll> q;
-	q.push(key);
-	dist[key] = 0;
-	while (!q.empty()) {
-		ll u = q.front();
-		q.pop();
-		fori (i, 0, n - 1) {
-			ll v = (u * otherKeys[i]) % 100000;
-			if (dist[v] == - 1) {
-				dist[v] = dist[u] + 1;
-				if (v == des) {
-					return dist[v];
-				}
-				q.push(v);
-			}
+void solve() {
+	int n; cin >> n;
+	student a[n + 1];
+	fori (i, 1, n) {
+		cin >> a[i].val;
+		a[i].index = i;
+	}
+	sort(a + 1, a + n + 1, [&] (const student &left, const student &right) {
+		return left.val > right.val;
+	});
+	int b[n + 1] = {0};
+	int rank = 1;
+	b[a[1].index] = rank;
+	for (int i = 2; i <= n; i++) {
+		if (a[i].val == a[i - 1].val) {
+			b[a[i].index] = rank;
+		} else {
+			rank = i;
+			b[a[i].index] = rank;
 		}
 	}
-	return -1;
-}
-void solve() {
-	cin >> key >> des;
-	cin >> n;
-	fori (i, 0, n - 1) {
-		cin >> otherKeys[i];
+	fori (i, 1, n) {
+		cout << b[i] << " ";
 	}
-	int res = bfs();
-	cout << res << endl;
 }
+
+
 
 int main(void){
 	#ifndef ONLINE_JUDGE

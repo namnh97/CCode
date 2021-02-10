@@ -1,4 +1,4 @@
-// https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/practice-problems/algorithm/dhoom-4/
+//https://codeforces.com/problemset/problem/448/B
 #include<bits/stdc++.h>
 #define ll long long 
 #define fori(i, a, b) for (int i = (a), _##i = (b); i <= _##i; ++i)
@@ -18,42 +18,41 @@ void debugOut() {
 	cerr << endl;
 }
 
-const int MAX = 100001;
-ll n, key, des;
-ll otherKeys[MAX];
-ll dist[MAX];
-bool visited[MAX];
+bool isArray(string s, string t) {
+	sort(s.begin(), s.end());
+	sort(t.begin(), t.end());
+	return  s == t;
+}
 
-ll bfs() {
-	memset(dist, -1, sizeof(dist));
-	queue<ll> q;
-	q.push(key);
-	dist[key] = 0;
-	while (!q.empty()) {
-		ll u = q.front();
-		q.pop();
-		fori (i, 0, n - 1) {
-			ll v = (u * otherKeys[i]) % 100000;
-			if (dist[v] == - 1) {
-				dist[v] = dist[u] + 1;
-				if (v == des) {
-					return dist[v];
-				}
-				q.push(v);
-			}
+bool isAutomaton(string s, string t) {
+	int index = 0;
+	for (int i = 0; i < (int)s.size(); i++) {
+		if (s[i] == t[index]) {
+			index++;
 		}
 	}
-	return -1;
+	return index == (int)t.size();
 }
-void solve() {
-	cin >> key >> des;
-	cin >> n;
-	fori (i, 0, n - 1) {
-		cin >> otherKeys[i];
+
+bool isBoth(string s, string t) {
+	for (auto it : t) {
+		int index = s.find(it);
+		if (index == -1) return false;
+		s[index]='0';
 	}
-	int res = bfs();
-	cout << res << endl;
+	return true;
 }
+
+void solve() {
+	string s, t;
+	cin >> s >> t;
+	if (isArray(s, t)) cout << "array";
+	else if (isAutomaton(s, t)) cout << "automaton";
+	else if (isBoth(s, t)) cout << "both";
+	else cout << "need tree";
+}
+
+
 
 int main(void){
 	#ifndef ONLINE_JUDGE
@@ -62,4 +61,5 @@ int main(void){
 	solve();
 	return 0;
 }
+
 

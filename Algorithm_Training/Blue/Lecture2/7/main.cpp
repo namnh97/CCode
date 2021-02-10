@@ -1,4 +1,4 @@
-// https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/practice-problems/algorithm/dhoom-4/
+//https://codeforces.com/problemset/problem/892/B
 #include<bits/stdc++.h>
 #define ll long long 
 #define fori(i, a, b) for (int i = (a), _##i = (b); i <= _##i; ++i)
@@ -14,46 +14,32 @@ void err(istream_iterator<string> it, T a, Args... args) {
 	cerr << *it << " = " << a << endl;
 	err(++it, args...);
 }
+
 void debugOut() {
 	cerr << endl;
 }
 
-const int MAX = 100001;
-ll n, key, des;
-ll otherKeys[MAX];
-ll dist[MAX];
-bool visited[MAX];
-
-ll bfs() {
-	memset(dist, -1, sizeof(dist));
-	queue<ll> q;
-	q.push(key);
-	dist[key] = 0;
-	while (!q.empty()) {
-		ll u = q.front();
-		q.pop();
-		fori (i, 0, n - 1) {
-			ll v = (u * otherKeys[i]) % 100000;
-			if (dist[v] == - 1) {
-				dist[v] = dist[u] + 1;
-				if (v == des) {
-					return dist[v];
-				}
-				q.push(v);
-			}
+void solve() {
+	int n; cin >> n;
+	int a[n];
+	fori (i, 0, n - 1) {
+		cin >> a[i];
+	}
+	int j = n - 1;
+	int cnt = 0;
+	int killPos;
+	for (int i = n - 1; i >= 0; i--) {
+		j = min(j, i);
+		killPos = max(0, i - a[i]);
+		if (killPos < j) {
+			cnt += (j - killPos);		
+			j = killPos;
 		}
 	}
-	return -1;
+	cout << n - cnt;
 }
-void solve() {
-	cin >> key >> des;
-	cin >> n;
-	fori (i, 0, n - 1) {
-		cin >> otherKeys[i];
-	}
-	int res = bfs();
-	cout << res << endl;
-}
+
+
 
 int main(void){
 	#ifndef ONLINE_JUDGE

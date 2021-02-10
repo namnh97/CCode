@@ -1,3 +1,4 @@
+//https://www.spoj.com/problems/BENEFACT/
 #include<bits/stdc++.h>
 #define ll long long 
 #define fori(i, a, b) for (int i = (a), _##i = (b); i <= _##i; ++i)

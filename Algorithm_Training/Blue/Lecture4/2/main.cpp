@@ -1,4 +1,4 @@
-// https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/practice-problems/algorithm/dhoom-4/
+//https://www.spoj.com/problems/STPAR/
 #include<bits/stdc++.h>
 #define ll long long 
 #define fori(i, a, b) for (int i = (a), _##i = (b); i <= _##i; ++i)
@@ -18,42 +18,48 @@ void debugOut() {
 	cerr << endl;
 }
 
-const int MAX = 100001;
-ll n, key, des;
-ll otherKeys[MAX];
-ll dist[MAX];
-bool visited[MAX];
-
-ll bfs() {
-	memset(dist, -1, sizeof(dist));
-	queue<ll> q;
-	q.push(key);
-	dist[key] = 0;
-	while (!q.empty()) {
-		ll u = q.front();
-		q.pop();
+void solve() {
+	int n;
+	while(1) {
+		stack<int> sideStreet;
+		cin >> n;
+		if (n == 0) {
+			return;
+		}
+		int a[n];
 		fori (i, 0, n - 1) {
-			ll v = (u * otherKeys[i]) % 100000;
-			if (dist[v] == - 1) {
-				dist[v] = dist[u] + 1;
-				if (v == des) {
-					return dist[v];
+			cin >> a[i];
+		}
+		int street = 1;
+		bool ok = true;
+		fori (i, 0, n - 1) {
+			// if struck is in sidestreet
+			while(!sideStreet.empty() &&  sideStreet.top() == street) {
+				street++;
+				sideStreet.pop();
+			}
+			// if struck is in order
+			if (a[i] == street) {
+				street++;
+			} else {
+				// if struck in order is larger than struck in side street
+				if (!sideStreet.empty() && a[i] > sideStreet.top()) {
+					ok = false;
+					break;
+				} else { // otherwise
+					sideStreet.push(a[i]);
 				}
-				q.push(v);
 			}
 		}
+		if (ok) {
+			cout << "yes" << endl;
+		} else {
+			cout << "no" << endl;
+		}
 	}
-	return -1;
 }
-void solve() {
-	cin >> key >> des;
-	cin >> n;
-	fori (i, 0, n - 1) {
-		cin >> otherKeys[i];
-	}
-	int res = bfs();
-	cout << res << endl;
-}
+
+
 
 int main(void){
 	#ifndef ONLINE_JUDGE
