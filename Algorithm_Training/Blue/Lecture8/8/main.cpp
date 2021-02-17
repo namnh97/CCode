@@ -1,3 +1,4 @@
+//https://www.spoj.com/problems/SAMER08A/#:~:text=SAMER08A%20%2D%20Almost%20Shortest%20Path&text=He%20defines%20the%20almost%20shortest,starting%20point%20to%20the%20destination.
 #include<bits/stdc++.h>
 #define ll long long 
 #define fori(i, a, b) for (int i = (a), _##i = (b); i <= _##i; ++i)

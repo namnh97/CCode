@@ -1,3 +1,4 @@
+//https://www.codechef.com/problems/RRATING
 #include<bits/stdc++.h>
 #define ll long long 
 #define pb push_back

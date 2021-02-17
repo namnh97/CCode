@@ -1,3 +1,4 @@
+//https://vjudge.net/problem/LightOJ-1224
 #include<bits/stdc++.h>
 #define ll long long 
 #define pb push_back

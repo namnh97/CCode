@@ -1,3 +1,4 @@
+//https://www.hackerrank.com/challenges/minimum-loss/problem
 #include<bits/stdc++.h>
 #define ll long long 
 #define pb push_back

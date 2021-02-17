@@ -1,3 +1,4 @@
+//https://www.spoj.com/problems/SOCIALNE/#:~:text=SOCIALNE%20%2D%20Possible%20Friends&text=Two%20persons%20are%20possible%20friends,help%20him%20in%20this%20task.
 #include<bits/stdc++.h>
 #define ll long long 
 #define fori(i, a, b) for (int i = (a), _##i = (b); i <= _##i; ++i)
